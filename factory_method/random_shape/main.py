@@ -1,6 +1,10 @@
+import random
+
 import pygame
 
+from factory_method.random_shape.ShapeContext import ShapeContext
 from factory_method.random_shape.ShapeFactory import ShapeFactory
+from factory_method.random_shape.ShapeType import ShapeType
 
 
 def main():
@@ -19,8 +23,8 @@ def main():
                 running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = event.pos
-                shape_type = "circle" if len(shapes) % 2 == 0 else "square"
-                shape = shape_factory.create_shape(shape_type, x, y)
+                shape_type = random.choice(list(ShapeType))
+                shape = shape_factory.create_shape(ShapeContext(shape_type, x, y))
                 shapes.append(shape)
 
         screen.fill((255, 255, 255))
